@@ -230,7 +230,8 @@ MESHDIM=1;
 NAME ='';	% title for the simulation
 
 scriptName = mfilename('fullpath');
-EXEC_PATH = fileparts(scriptName);	% default is same directory as qdyn.m
+%EXEC_PATH = fileparts(scriptName);	% default is same directory as qdyn.m
+EXEC_PATH = '/home/crodriguezpiceda/buildqdyn/qdynv01/';
 
 %-- fault and solver type
 FAULT_TYPE = 1;
