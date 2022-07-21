@@ -16,7 +16,9 @@ EXEC_PATH = /home/crodriguezpiceda/buildqdyn/qdynv01/
 # For parallel runs with MPI+OpenMP:
 F90 = mpif90
 #OPT = -O3 -Wall -fopenmp
-OPT = -O2 -w
+#OPT = -O2 -w
+# for foseres
+OPT = -O2 -ftree-vectorize -funroll-loops -ffast-math
 #-- Intel Fortran --
 # F90 = ifort
 # OPT = -O3 -ip -ipo
@@ -54,7 +56,7 @@ PREPROC = -cpp
 #OPT = -O3 -Wall
 
 travis: F90 = mpif90
-	OPT = -O2 -w
+	OPT = -O2 -ftree-vectorize -funroll-loops -ffast-math
 	PREPROC = -cpp
 
 #== END USER SETTINGS =============================================
