@@ -43,9 +43,11 @@ class qdyn:
 
     # Directory path to qdyn executable
     # Default: same directory as this python script
-    qdyn_path = os.path.abspath(
-        os.path.join(os.path.realpath(__file__), os.pardir)
-    )
+    #qdyn_path = os.path.abspath(
+    #    os.path.join(os.path.realpath(__file__), os.pardir)
+    #)
+    # other directory than the python script
+    qdyn_path = "/home/crodriguezpiceda/buildqdyn/qdyn_vintel/"
     # Working directory can be kept empty, except for special cases
     work_dir = ""
     # Flag for using the bash environment in Windows 10
