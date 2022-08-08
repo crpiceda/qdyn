@@ -11,8 +11,8 @@ EXEC_PATH = /home/crodriguezpiceda/buildqdyn/qdyn_vintel/
 
 # GNU, serial
 #Only MPI no openMP
-F90 = mpif90
-OPT = -O3 -Wall
+#F90 = mpif90
+#OPT = -O3 -Wall
 # For parallel runs with MPI+OpenMP:
 #F90 = mpif90
 #OPT = -O3 -Wall -fopenmp
