@@ -5,7 +5,7 @@
 #EXEC_PATH = .
 #EXEC_PATH = $(HOME)/qdyn_svn/trunk/src/
 #EXEC_PATH = $(HOME)/bin/
-EXEC_PATH = /home/crodriguezpiceda/buildqdyn/qdyn_vintel/
+EXEC_PATH = /home/crodriguezpiceda/buildqdyn/qdyn_vintel_openmp/
 
 # 2. Comment/uncomment/add/modify the lines corresponding to your compiler:
 
@@ -22,9 +22,9 @@ EXEC_PATH = /home/crodriguezpiceda/buildqdyn/qdyn_vintel/
 # OPT = -O3 -ip -ipo
 # Intel fortran with parallel runs with MPI
 F90 = mpiifort
-OPT = -O3
+#OPT = -O3
 # For parallel runs with OpenMP:
-#OPT = -O3 -ip -ipo -parallel -openmp -par-threshold:50
+OPT = -O3 -ip -ipo -parallel -qopenmp -par-threshold:50
 #-no-inline-factor
 #OPT = -O3 -pg -g
 #OPT = -O3
@@ -55,7 +55,7 @@ PREPROC = -fpp
 #CFLAGS = '' 
 
 travis: F90 = mpiifort
-	OPT = -O3
+	OPT = -O3 -ip -ipo -parallel -qopenmp -par-threshold:50
 	PREPROC = -fpp
 
 #== END USER SETTINGS =============================================

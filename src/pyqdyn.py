@@ -47,7 +47,7 @@ class qdyn:
     #    os.path.join(os.path.realpath(__file__), os.pardir)
     #)
     # other directory than the python script
-    qdyn_path = "/home/crodriguezpiceda/buildqdyn/qdyn_vintel/"
+    qdyn_path = "/home/crodriguezpiceda/buildqdyn/qdyn_vintel_openmp/"
     # Working directory can be kept empty, except for special cases
     work_dir = ""
     # Flag for using the bash environment in Windows 10
