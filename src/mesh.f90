@@ -188,6 +188,8 @@ subroutine init_mesh_2D(m)
 if (.not.is_MPI_parallel()) then
 
   m%dx = m%Lfault/m%nx
+
+if (.not.associated(m%x)) then
   allocate(m%x(m%nn), m%y(m%nn), m%z(m%nn), m%dip(m%nn))
 
   ! set x, y, z, dip of first row
@@ -212,6 +214,7 @@ if (.not.is_MPI_parallel()) then
     m%z(j0+1:j0+m%nx) = m%z(j0) + 0.5d0*m%dw(i-1)*sd0 + 0.5d0*m%dw(i)*sd
     m%dip(j0+1:j0+m%nx) = m%DIP_W(i)
   end do
+endif
 
     m%xglob => m%x
     m%yglob => m%y

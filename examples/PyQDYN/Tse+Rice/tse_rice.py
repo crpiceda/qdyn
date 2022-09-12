@@ -19,6 +19,8 @@ src_dir = os.path.abspath(
     os.path.join(
         os.path.join(__file__, qdyn_dir), "src")
 )
+print(src_dir)
+
 # Append src directory to Python path
 sys.path.append(src_dir)
 # Import QDYN wrapper
@@ -131,3 +133,12 @@ plt.ylabel(r"$V_{max}$ [m/s]")
 plt.xlabel("time [yr]")
 plt.tight_layout()
 plt.show()
+
+plt.clf()
+plt.plot(N, p.mesh_dict["A"] - p.mesh_dict["B"])
+plt.axhline(0, ls=":", c="k")
+plt.xlabel("position [m]")
+plt.ylabel("(a-b) [-]")
+plt.tight_layout()
+plt.show()
+
