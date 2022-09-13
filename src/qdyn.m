@@ -231,7 +231,7 @@ NAME ='';	% title for the simulation
 
 scriptName = mfilename('fullpath');
 %EXEC_PATH = fileparts(scriptName);	% default is same directory as qdyn.m
-EXEC_PATH = '/home/crodriguezpiceda/buildqdyn/qdyn_vintel_openmp/';
+EXEC_PATH = '/home/crodriguezpiceda/buildqdyn/qdyn_vintel_openmp_normal/';
   
 %-- fault and solver type
 FAULT_TYPE = 1;
