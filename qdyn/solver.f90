@@ -21,6 +21,7 @@ contains
 subroutine solve(pb)
 
   use output, only : write_output
+  use output_new, only : write_output_new
   use my_mpi, only : is_MPI_parallel, finalize_mpi, synchronize_all
 
   type(problem_type), intent(inout)  :: pb
@@ -31,6 +32,7 @@ subroutine solve(pb)
   ! Before the first step, update field and write output (initial state)
   call update_field(pb)
   call write_output(pb)
+  call write_output_new(pb)
 
   iktotal=0
   ! Time loop
@@ -44,6 +46,7 @@ subroutine solve(pb)
     call check_stop(pb)
     ! Write output (if needed)
     call write_output(pb)
+    call write_output_new(pb)
   enddo
 
   ! Finalise MPI

@@ -106,6 +106,7 @@ module problem_class
 
     ! Containers for local and global quantities
     type(optr), dimension(:), allocatable :: objects_glob, objects_loc
+    type(optr), dimension(:), allocatable :: objects_glob_new, objects_loc_new
     ! Number of objects in the containers
     integer :: nobj=9
 

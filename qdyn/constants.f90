@@ -77,4 +77,29 @@ character(*), parameter :: FILE_OT = "output_ot_"
 character(*), parameter :: FILE_IASP = "output_iasp"
 character(*), parameter :: FILE_VMAX = "output_vmax"
 
+! Output units
+integer, parameter :: FID_SCREEN_NEW = 61
+integer, parameter :: FID_OT_NEW = 181
+integer, parameter :: FID_OX_NEW = 191
+integer, parameter :: FID_VMAX_NEW = 221
+integer, parameter :: FID_IASP_NEW = 231
+integer, parameter :: FID_QSB_PRE_NEW = 1001
+integer, parameter :: FID_QSB_POST_NEW = 1011
+integer, parameter :: FID_TIME_NEW = 1211
+integer, parameter :: FID_STATIONS_NEW = 2001
+integer, parameter :: FID_MW_NEW = 2221
+integer, parameter :: FID_OX_DYN_NEW = 200001
+
+! Output names
+character(*), parameter :: FILE_OX_NEW = "output_ox_new"
+character(*), parameter :: FILE_OX_DYN_PRE_NEW = "output_dyn_pre_new"
+character(*), parameter :: FILE_OX_DYN_POST_NEW = "output_dyn_post_new"
+character(*), parameter :: FILE_OX_DYN_MAX_NEW = "output_dyn_max_new"
+character(*), parameter :: FILE_OT_NEW = "output_ot_new"
+character(*), parameter :: FILE_IASP_NEW = "output_iasp_new"
+character(*), parameter :: FILE_VMAX_NEW = "output_vmax_new"
+
+
+
+
 end module constants

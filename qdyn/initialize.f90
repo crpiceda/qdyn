@@ -22,6 +22,8 @@ subroutine init_all(pb)
   use diffusion_solver, only: init_tp
   use ode_rk45_2, only : init_rk45_2
   use output, only: initialize_output
+  use output_new, only: initialize_output_new
+
 !!$  use omp_lib
 
   type(problem_type), intent(inout) :: pb
@@ -109,6 +111,7 @@ subroutine init_all(pb)
                     pb%features%stress_coupling, pb%finite, pb%test_mode)
 
   call initialize_output(pb)
+  call initialize_output_new(pb)
 
   ! SEISMIC: initialise Runge-Kutta ODE solver, if selected
   if (SOLVER_TYPE == 2) then
