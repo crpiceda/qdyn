@@ -22,7 +22,7 @@ module problem_class
  ! timeseries outputs: at every time step, but only macroscopic quantities
   type ot_type
     double precision :: v_th
-    double precision, dimension(:), allocatable :: xsta, ysta, zsta, v_pre, v_pre2
+    double precision, dimension(:), allocatable :: xsta, ysta, zsta, v_pre, v_pre2,v_pre3,v_pre4
     integer :: ic=-1, ntout=0, not=-1, not_vmax=-1
     integer, dimension(:), allocatable :: iasp, iot
     character(len=16), dimension(:), allocatable :: fmt, fmt_vmax
@@ -52,7 +52,7 @@ module problem_class
   ! End of the CNS model structure
 
   ! SEISMIC: structure that holds the thermal pressurisation (TP) model parameters
-  ! See input.f90 for a description of the parameters
+  ! See input.f90 for a description of the parameters 
   ! Spectral mesh parameters (Dlogl, lw_max, Nl) are hard-coded in mesh.f90
   type tp_type
     type (spectral_mesh_type) :: mesh
@@ -150,7 +150,8 @@ module problem_class
     double precision, pointer ::  tau_max_glob(:) => null(), t_rup_glob(:) => null(), &
                                   v_max_glob(:) => null(), t_vmax_glob(:) => null()
     logical :: allocated_glob = .false.
-   ! QSB
+    logical :: allocated_glob_new = .false.
+   ! QSB 
     double precision :: DYN_M,DYN_th_on,DYN_th_off
     integer :: DYN_FLAG,DYN_SKIP
     ! Flag for unit testing

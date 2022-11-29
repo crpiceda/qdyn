@@ -17,7 +17,7 @@ subroutine read_main(pb)
   use problem_class
   use mesh, only : read_mesh_parameters, read_mesh_nodes, mesh_get_size
   use output, only : ot_read_stations
-  use output_new, only : ot_read_stations_new
+  !use output_new, only : ot_read_stations_new
 
   use logger, only : log_screen
   use my_mpi, only : my_mpi_tag, is_MPI_parallel

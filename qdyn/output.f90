@@ -258,7 +258,7 @@ subroutine ot_init(pb)
 
   use problem_class
   use constants, only:  BIN_OUTPUT, FID_IASP, FID_OT, FID_VMAX, &
-                        FILE_IASP, FILE_OT, FILE_VMAX
+                        FILE_IASP, FILE_OT, FILE_VMAX, FID_SCREEN
   use my_mpi, only: is_MPI_parallel, is_MPI_master, gather_allvi_root
   use mesh, only: mesh_get_size, nnLocal_perproc, nnoffset_glob_perproc
 
@@ -273,11 +273,13 @@ subroutine ot_init(pb)
   ! Number of mesh elements
   n = mesh_get_size(pb%mesh)
   nnGlobal = pb%mesh%nnglob
+  
 
   ! Allocate slip rate history for IASP output
   allocate(pb%ot%v_pre(nnGlobal), pb%ot%v_pre2(nnGlobal))
   pb%ot%v_pre = 0.d0
   pb%ot%v_pre2 = 0.d0
+  !write(FID_SCREEN, *) 'pb%ot%v_pre = ',pb%ot%v_pre(pb%mesh%nnglob)
 
   ! Number of ot output quantities
   pb%ot%not = 9
