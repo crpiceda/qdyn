@@ -35,7 +35,7 @@ class qdyn:
     qdyn_path = os.path.abspath(
         os.path.join(os.path.realpath(__file__), os.pardir)
     )
-    qdyn_path = "/home/crodriguezpiceda/buildqdyn/qdyn_faultlabel"
+    qdyn_path = "/work/e820/e820/cpiceda/build_qdyn/qdyn_github_devel"
     # Working directory can be kept empty, except for special cases
     work_dir = ""
     # Flag for using the bash environment in Windows 10

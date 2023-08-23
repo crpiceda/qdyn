@@ -5,7 +5,7 @@
 # EXEC_PATH = .
 #EXEC_PATH = $(HOME)/qdyn_svn/trunk/src/
 #EXEC_PATH = $(HOME)/bin/
-EXEC_PATH = /home/e820/e820/cpiceda/build_qdyn/qdyn_github_devel
+EXEC_PATH = /work/e820/e820/cpiceda/build_qdyn/qdyn_github_devel/
 # 2. Comment/uncomment/add/modify the lines corresponding to your compiler:
 
 # GNU, serial
