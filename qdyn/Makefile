@@ -16,6 +16,8 @@ F90 = ftn
 # For parallel runs with MPI+OpenMP:
 #F90 = mpif90
 OPT = -O3 -Wall -fopenmp -fallow-argument-mismatch
+# some flags useful for compiling
+# OPT = -O3 -Wall -fopenmp -fallow-argument-mismatch -g -fcheck=all -fbounds-check
 #OPT = -O2 -w
 #-- Intel Fortran --
 # F90 = mpiifort
