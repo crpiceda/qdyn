@@ -129,6 +129,7 @@ def nucleation_point(mesh_dict, events_dict, save_output=True):
             df_count_np_f = df_np_f.value_counts(["x", "y", "z"]).to_frame()
             df_count_np_f = df_count_np_f.reset_index() # convert indices of coordinates x, y and z to columns
             df_count_np_f.rename({"count":"count_np"}, axis=1, inplace=True) # rename column with frequency of np (sometimes it's called 0, sometimes count)
+            df_count_np_f.rename({0:"count_np"}, axis=1, inplace=True) # rename column with frequency of np (sometimes it's called 0, sometimes count)
             print(df_count_np_f) # to check the right name of count
         else:
             df_count_np_f = pd.DataFrame(columns = ["x", "y", "z", "count_np"])

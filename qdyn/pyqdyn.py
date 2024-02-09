@@ -476,6 +476,56 @@ class qdyn:
 
         pass
 
+
+    def make_frictional_distribution_3d(self, boa_seis, boa_cre, n_buffer, trans_d):
+        """
+        Making the velocity strengthening area the pretty way.
+        Adapting from Yifan Yin's wrapper
+        Note: Use once the mesh has been generated with render_mesh(). For now it only works with one fault.
+
+        Parameters
+        ----------
+        side_buffer : int
+            Number of nodes to be VS on the side ONLY.
+        boa_cre : real
+            b/a value for the VS part
+        boa_seis : real
+            b/a value for the VW part
+        n_buffer : int
+            number of elements with VS
+        trans_d : int
+            width of transition zone between VS and VW
+        """
+
+        # Transition of VS/VW zones: method 2
+        mesh_index = np.arange(self.set_dict['N'])
+        self.mesh_dict['B'] = self.mesh_dict['A'] * boa_seis # set the VW area
+
+        # First the VS sides
+        self.mesh_dict['B'][mesh_index // self.set_dict['NX'] < n_buffer] = self.set_dict["SET_DICT_RSF"]['A']*boa_cre
+        self.mesh_dict['B'][mesh_index // self.set_dict['NX'] > self.set_dict['NW']-1-n_buffer] = self.set_dict["SET_DICT_RSF"]['A'] * boa_cre
+        self.mesh_dict['B'][mesh_index % self.set_dict['NX'] < n_buffer] = self.set_dict["SET_DICT_RSF"]['A'] * boa_cre
+        self.mesh_dict['B'][mesh_index % self.set_dict['NX'] > self.set_dict['NX']-1-n_buffer] = self.set_dict["SET_DICT_RSF"]['A'] * boa_cre
+
+
+        # Then the transition zone
+        dx = self.set_dict['L']/self.set_dict['NX']
+        n_trans = int(trans_d // dx)
+        b_trans = np.linspace(boa_cre, boa_seis, n_trans)
+        for i in range(n_trans):
+            print(n_buffer+i, self.set_dict['NX']-n_buffer-i, n_buffer+i, self.set_dict['NW']-n_buffer-i)
+            self.mesh_dict['B'][(mesh_index // self.set_dict['NX'] == i+n_buffer) & (mesh_index % self.set_dict['NX'] >= n_buffer) & (mesh_index % self.set_dict['NX'] < self.set_dict['NX']-n_buffer-i)] = \
+                self.set_dict["SET_DICT_RSF"]['A'] * b_trans[i]
+            self.mesh_dict['B'][(mesh_index // self.set_dict['NX'] == self.set_dict['NW']-1-n_buffer-i) & (mesh_index % self.set_dict['NX'] >= n_buffer) & (mesh_index % self.set_dict['NX'] < self.set_dict['NX']-n_buffer-i)] = \
+                self.set_dict["SET_DICT_RSF"]['A'] * b_trans[i]
+            self.mesh_dict['B'][(mesh_index % self.set_dict['NX'] == i+n_buffer) & (mesh_index // self.set_dict['NX'] >= n_buffer) & (mesh_index // self.set_dict['NX'] < self.set_dict['NW']-n_buffer-i)] = \
+                self.set_dict["SET_DICT_RSF"]['A'] * b_trans[i]
+            self.mesh_dict['B'][(mesh_index % self.set_dict['NX'] == self.set_dict['NX']-1-i-n_buffer) & (mesh_index // self.set_dict['NX'] >= n_buffer) & (mesh_index // self.set_dict['NX'] < self.set_dict['NW']-n_buffer-i)] = \
+                self.set_dict["SET_DICT_RSF"]['A'] * b_trans[i]
+
+
+        return self.mesh_dict
+        
     def write_input(self):
 
         # The mesh should not have been rendered at this point
