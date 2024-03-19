@@ -1,5 +1,5 @@
 """
-                    .: PyQDYN: Python wrapper for QDYN :.
+.: PyQDYN: Python wrapper for QDYN :.
 
 Author: Martijn van den Ende
 
@@ -525,7 +525,7 @@ class qdyn:
 
 
         return self.mesh_dict
-        
+    
     def write_input(self):
 
         # The mesh should not have been rendered at this point

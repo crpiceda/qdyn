@@ -168,14 +168,14 @@ def slip_profile_new(ox, dip, warm_up=0, orientation="horizontal", figsize=figsi
     fig = plt.figure(figsize=figsize)
 
     if orientation == "horizontal":
-        CS = plt.contourf(x, slip, np.log10(v), levels=200, cmap="magma")
+        CS = plt.contour(x, slip, np.log10(v), levels=200, cmap="magma")
         plt.xlabel("position [m]")
         plt.ylabel("slip [m]")
         CB = plt.colorbar(CS, orientation="horizontal")
         CB.ax.set_title("slip rate [m/s]")
     elif orientation == "vertical":
         ddd -= ddd.min()
-        CS = plt.contourf(slip, ddd * 1e-3, np.log10(v), levels=200, cmap="magma")
+        CS = plt.contour(slip, ddd * 1e-3, np.log10(v), levels=200, cmap="magma")
         plt.ylabel("downdip distance [km]")
         plt.xlabel("slip [m]")
         plt.gca().invert_yaxis()
