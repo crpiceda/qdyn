@@ -12,7 +12,7 @@ EXEC_PATH = /work/e820/e820/cpiceda/build_qdyn/qdyn_github_devel/
 #Only MPI no openMP
 # F90 = mpif90
 F90 = ftn
-#OPT = -O3 -Wall
+OPT = -O3 -Wall
 # For parallel runs with MPI+OpenMP:
 #F90 = mpif90
 OPT = -O3 -Wall -fopenmp -fallow-argument-mismatch
@@ -46,9 +46,9 @@ OPT = -O3 -Wall -fopenmp -fallow-argument-mismatch
 
 # 3. Set the compiler option that enables preprocessing in your compiler
 # ifort
-# PREPROC = -fpp
-# gfortran
 PREPROC = -cpp
+# gfortran
+# PREPROC = -cpp
 #PG, KAUST server
 # CFLAGS = -B/usr/lib/x86_64-linux-gnu
 #CFLAGS = '' 

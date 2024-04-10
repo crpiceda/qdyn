@@ -106,6 +106,9 @@ def nucleation_point(mesh_dict, events_dict, save_output=True):
         ## assign Mw to DataFrame df_np_f
         df_np_f["Mw"] = model_dict["ev"][fault_label]["Mw"]
         
+        ## assign Mw to DataFrame df_np_f
+        df_np_f["fault_label"] = model_dict["ev"][fault_label]["fault_label"]
+
         # save nucleation points to dictionary
         model_dict["np"][fault_label] = df_np_f
         

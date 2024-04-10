@@ -14,20 +14,41 @@ t_year = 365 * t_day
 figsize = (9, 8)
 
 
-def timeseries(ot, ot_vmax):
+def timeseries(ot, ot_vmax,tmin=None,tmax=None):
+    
+    # assign tmin and tmax of the simulation if None
+    if tmin==None:
+        tmin=ot['t'].min()
+    elif tmax==None:
+        tmax=ot['t'].max()
+
+    # check if tmin and t max are bounded correctly
+    if (tmin!=None) & ((tmax!=None)):
+        if tmin<ot['t'].min():
+            print('tmin is smaller than min t of simulation')
+            return()
+        elif tmax>ot['t'].max():
+            print('tmax is larger than max t of simulation')
+            return()
+    
+        ot_sample = ot[(ot['t']>=tmin) & (ot['t']<=tmax)]
+        ot_vmax_sample = ot_vmax[(ot_vmax['t']>=tmin) & (ot_vmax['t']<=tmax)]
+    else:
+        ot_sample = ot
+        ot_vmax_sample = ot_vmax
 
     fig, axes = plt.subplots(nrows=4, ncols=1, figsize=figsize)
 
-    axes[0].plot(ot["t"] / t_year, ot["tau"])
+    axes[0].plot(ot_sample["t"] / t_year, ot_sample["tau"])
     axes[0].set_ylabel("tau [Pa]")
 
-    axes[1].plot(ot["t"] / t_year, ot["theta"])
+    axes[1].plot(ot_sample["t"] / t_year, ot_sample["theta"])
     axes[1].set_ylabel("state [s]")
 
-    axes[2].plot(ot["t"] / t_year, ot["sigma"])
+    axes[2].plot(ot_sample["t"] / t_year, ot_sample["sigma"])
     axes[2].set_ylabel("sigma [Pa]")
 
-    axes[3].plot(ot_vmax["t"] / t_year, ot_vmax["v"])
+    axes[3].plot(ot_vmax_sample["t"] / t_year, ot_vmax_sample["v"])
     axes[3].set_ylabel("max v [m/s]")
     axes[3].set_xlabel("time [yr]")
     axes[3].set_yscale("log")
@@ -771,8 +792,9 @@ def plot_vmax_fault(fault):
 
 def plot_frict_prop_1d(mesh_dict):
     """
-    Plot 1D profile A-B, A/B and SIGMA in the middle of the fault
+    Plot 1D depth profile of A-B, A/B and SIGMA in the middle of the fault
     Works for a 2D fault
+    If working with multiple faults, make sure to have filtered the mesh accordingly
     """
 
 
