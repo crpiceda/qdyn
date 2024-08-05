@@ -127,13 +127,14 @@ def nucleation_point(mesh_dict, events_dict, save_output=True):
         coords["fault_label"] = mesh_dict["FAULT_LABEL"]
         
         # Count of nucleation points fault
-        print('len', len(df_np_f))
+        # print('len', len(df_np_f))
         if len(df_np_f)!=0:
             df_count_np_f = df_np_f.value_counts(["x", "y", "z"]).to_frame()
             df_count_np_f = df_count_np_f.reset_index() # convert indices of coordinates x, y and z to columns
-            df_count_np_f.rename({"count":"count_np"}, axis=1, inplace=True) # rename column with frequency of np (sometimes it's called 0, sometimes count)
-            df_count_np_f.rename({0:"count_np"}, axis=1, inplace=True) # rename column with frequency of np (sometimes it's called 0, sometimes count)
-            print(df_count_np_f) # to check the right name of count
+            # df_count_np_f.rename({"count":"count_np"}, axis=1, inplace=True) # rename column with frequency of np (sometimes it's called 0, sometimes count)
+            # df_count_np_f.rename({0:"count_np"}, axis=1, inplace=True) # rename column with frequency of np (sometimes it's called 0, sometimes count)
+            df_count_np_f.rename({df_count_np_f.columns[3]:"count_np"}, axis=1, inplace=True) # rename column with frequency of np
+            # print(df_count_np_f) # to check the right name of count
         else:
             df_count_np_f = pd.DataFrame(columns = ["x", "y", "z", "count_np"])
             df_count_np_f["x"] = np.nan
@@ -145,7 +146,7 @@ def nucleation_point(mesh_dict, events_dict, save_output=True):
         #coords["count_np"] = np.nan
         df_count_np_f["i_np"] = np.nan
     
-        print(df_count_np_f)
+        
         # Find indices of nucleation points of F1 in the coordinate mesh
         list_i_np_f = [] # empty list where nucleation points of F1 will be stored
         for row in np.arange(0,len(df_count_np_f)):
@@ -153,6 +154,8 @@ def nucleation_point(mesh_dict, events_dict, save_output=True):
             list_i_np_f.append(i_np_f)
             df_count_np_f.loc[row, "i_np"] = int(i_np_f)
     
+        # print(df_count_np_f)
+        print(i_np_f)
         # Set indices of nucleation points as index of the DataFrame for F1
         df_count_np_f.index = list_i_np_f
         df_count_np_f.index.name = "i_np"
