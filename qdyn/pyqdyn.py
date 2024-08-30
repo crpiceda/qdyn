@@ -787,6 +787,7 @@ class qdyn:
     # Read QDYN output data
     # This modified function allows to retrieve the outputs from a folder other than the one of the python script
     # It can also read the output of the last snapshot
+    # Note that if using 'path_output', the path should end with '/'
 
     def read_output(self, mirror=False, path_output=None, read_ot=True, filename_ot="output_ot",
                     filename_vmax="output_vmax", read_ox=True,
@@ -841,7 +842,7 @@ class qdyn:
 
                 df = read_csv(
                     filename_iot, header=None, skiprows=nheaders_ot,
-                    names=quants_ot, sep='\s+'
+                    names=quants_ot, delim_whitespace=True
                 )
 
                 # Sanitise output (check for near-infinite numbers, etc.)
@@ -857,7 +858,7 @@ class qdyn:
 
             self.ot_vmax = read_csv(
                 filename_vmax, header=None, skiprows=nheaders_vmax,
-                names=quants_vmax, sep='\s+'
+                names=quants_vmax, delim_whitespace=True
             )
             # Discard duplicate rows from duplicate time-steps
             self.ot_vmax = self.ot_vmax.drop_duplicates(subset=["step"], keep="first") 
@@ -875,7 +876,7 @@ class qdyn:
             if path_output!= None:
                 filename_ox= path_output + filename_ox
 
-            data_ox = read_csv(filename_ox, header=None, names=quants_ox, sep='\s+', comment="#")
+            data_ox = read_csv(filename_ox, header=None, names=quants_ox, delim_whitespace=True, comment="#")
 
             # Store snapshot data in self.ox
             self.ox = data_ox
@@ -902,7 +903,7 @@ class qdyn:
             if path_output!= None:
                 filename_ox_last = path_output + filename_ox_last
 
-            data_ox_last = read_csv(filename_ox_last, header=None, names=quants_ox, sep='\s+', comment="#")
+            data_ox_last = read_csv(filename_ox_last, header=None, names=quants_ox, delim_whitespace=True, comment="#")
 
             # Store snapshot data in self.ox
             self.ox_last = data_ox_last
@@ -942,7 +943,7 @@ class qdyn:
                 # Read pre-rupture file
                 data_ox_dyn_pre[i] = read_csv(
                     ox_dyn_files_pre[i], header=None, names=quants_ox,
-                    sep='\s+', comment="#"
+                    delim_whitespace=True, comment="#"
                 )
                 # Sanitise output (check for near-infinite numbers, etc.)
                 data_ox_dyn_pre[i] = data_ox_dyn_pre[i].apply(pd.to_numeric, errors="coerce")
@@ -953,7 +954,7 @@ class qdyn:
                 # Read pre-rupture file
                 data_ox_dyn_post[i] = read_csv(
                     ox_dyn_files_post[i], header=None, names=quants_ox,
-                    sep='\s+', comment="#"
+                    delim_whitespace=True, comment="#"
                 )
                 # Sanitise output (check for near-infinite numbers, etc.)
                 data_ox_dyn_post[i] = data_ox_dyn_post[i].apply(pd.to_numeric, errors="coerce")
@@ -964,7 +965,7 @@ class qdyn:
                 # Rupture stats file
                 data_ox_dyn_rup[i] = read_csv(
                     ox_dyn_files_rup[i], header=None, names=quants_rup,
-                    sep='\s+', comment="#"
+                    delim_whitespace=True, comment="#"
                 )
                 # Sanitise output (check for near-infinite numbers, etc.)
                 data_ox_dyn_rup[i] = data_ox_dyn_rup[i].apply(pd.to_numeric, errors="coerce")
@@ -1007,7 +1008,7 @@ class qdyn:
                 # Read output file
                 self.fault[n] = read_csv(
                 filename_fault, header=None, skiprows=nheaders_fault, usecols=col_list,
-                names=quants_fault, sep='\s+'
+                names=quants_fault, delim_whitespace=True
                 )
 
                 # Discard duplicate rows from duplicate time-steps

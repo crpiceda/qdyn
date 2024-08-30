@@ -239,8 +239,8 @@ def compute_events(set_dict, mesh_dict, ot_fault, vmax=0.01,tmin=0,tmax=None, sa
         Mo_f = df_ev_f["cum_potency"]*G
         Mo_f=Mo_f.rename("Mo") # rename Series
 
-        # Calculate moment magnitude Mw as 2/3*np.log10(Mo1) - 6.06
-        Mw_f = 2/3*np.log10(Mo_f) -6.06
+        # Calculate moment magnitude Mw as 2/3*(np.log10(Mo1) - 9.1) (IASPEI)
+        Mw_f = 2/3*(np.log10(Mo_f) -9.1)
         Mw_f=Mw_f.rename("Mw") # rename Series
 
         # Assign Mw to column in event DataFrame 
