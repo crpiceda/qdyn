@@ -236,8 +236,8 @@ def compute_events(set_dict, mesh_dict, ot_fault, vmax=0.01,tmin=0,tmax=None, sa
         G = model_dict["set_dict"]["MU"] # shear modulus
 
         # Calculate seismic moment Mo of each event in the fault as P*G
-        #Mo_f = df_ev_f["cum_potency"]*G
-        #Mo_f=Mo_f.rename("Mo") # rename Series
+        Mo_f = df_ev_f["cum_potency"]*G
+        Mo_f=Mo_f.rename("Mo") # rename Series
 
         # Calculate moment magnitude Mw as 2/3*(np.log10(Mo1) - 9.1) (IASPEI)
         Mw_f = 2/3*(np.log10(Mo_f) -9.1)
