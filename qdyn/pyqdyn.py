@@ -552,7 +552,11 @@ class qdyn:
         if ((settings["VERBOSE"] == 1) and ("NTOUT" in settings.keys())):
             print("Warning: the setting `NTOUT` has been deprecated. Specify `NTOUT_OT`, `NTOUT_OX`, or `NTOUT_LOG` instead")
 
-        # Define chunk size for each processor
+       # Warn the user if NW<nproc. If this is the case it will assign 0 to nwLocal and the run will fail
+        if settings["NW"]<Nprocs:
+            print("Warning: Nprocs is smaller than Nw. Nprocs must be equal or higher than Nw to define the chunks properly")
+
+       # Define chunk size for each processor
         nwLocal = (settings["NW"] // Nprocs) * np.ones(Nprocs, dtype=int)
         nwLocal[Nprocs-1] += settings["NW"] % Nprocs
         nnLocal = 0
