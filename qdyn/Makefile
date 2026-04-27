@@ -6,18 +6,17 @@
 #EXEC_PATH = $(HOME)/qdyn_svn/trunk/src/
 #EXEC_PATH = $(HOME)/bin/
 # EXEC_PATH = /work/e820/e820/cpiceda/build_qdyn/qdyn_github_devel/
-EXEC_PATH= /mnt/vast-nhr/projects/nik00114/qdyn/build
+EXEC_PATH= /Users/crpiceda/projects/qdyn/build_qdyn
 # 2. Comment/uncomment/add/modify the lines corresponding to your compiler:
 
 # GNU, serial
 #Only MPI no openMP
 # F90 = mpif90
-F90 = mpiifx
+F90 = mpifort
 # OPT = -O3 -Wall
 # For parallel runs with MPI+OpenMP:
 #F90 = mpif90
-# OPT = -O3 -Wall -fopenmp -fallow-argument-mismatch
-OPT = -O3 -qopenmp
+OPT = -O3 -Wall -fopenmp -fallow-argument-mismatch
 # some flags useful for compiling
 # OPT = -O3 -Wall -fopenmp -fallow-argument-mismatch -g -fcheck=all -fbounds-check
 #OPT = -O2 -w
@@ -56,7 +55,7 @@ PREPROC = -cpp
 #CFLAGS = '' 
 
 test: F90 = mpiifx
-	OPT = -O3 -qopenmp
+	OPT =  -O3 -Wall -fopenmp -fallow-argument-mismatch
 	PREPROC = -cpp
 
 #== END USER SETTINGS =============================================
