@@ -251,7 +251,7 @@ subroutine log_write(pb)
   endif
 
   ! Log message
-  write(msg, "(i7x,4(x,e11.3))")  &
+  write(msg, "(i7,4(1x,e11.3))")  &
     pb%it, pb%dt_did, pb%time/YEAR, pb%vmaxglob, sigma_max_glob/1.0D6
   call log_msg(msg)
 
